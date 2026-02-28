@@ -30,6 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        <link rel="icon" type="image/svg+xml" />
         <title>Santosh Kumar - Portfolio</title>
         <meta name="description" content="Gen AI Engineer & Full-Stack Developer" />
       </head>
