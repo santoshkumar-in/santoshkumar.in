@@ -1,36 +1,14 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Santosh Kumar
+### Full-Stack Engineer · 8+ Years Experience
 
-## Getting Started
+[![Portfolio](https://img.shields.io/badge/Portfolio-santoshkumar.in-0A66C2?style=flat-square&logo=vercel&logoColor=white)](https://santoshkumar.in)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-santoshkumar--in-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/santoshkumar-in)
+[![GitHub](https://img.shields.io/badge/GitHub-santoshkumar--in-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/santoshkumar-in)
 
-First, run the development server:
+</div>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## About Me
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Full-Stack Engineer with **8+ years of experience** delivering scalable, high-performance web applications. I specialize in building robust systems with a focus on **security**, **performance optimization**, and **cloud infrastructure** — from rapid prototypes to enterprise-grade platforms.
