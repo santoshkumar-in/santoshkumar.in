@@ -58,7 +58,7 @@ export function HelloPage({ onContactClick, version, C }: HelloPageProps) {
       <div style={{ position: "relative", zIndex: 1, flex: "1 1 0", minWidth: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: isMobile ? "24px 24px 48px" : "0 48px 0 72px" }}>
         <div className="fade-1" style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "8px", marginBottom: "28px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            <Dot color={version === "genai" ? C.accent : C.green} />
+            <Dot color={C.green} />
             <span style={{ ...mono, fontSize: "12px", color: C.textMid, letterSpacing: "0.03em" }}>
               {version === "genai" ? "Available for AI projects & roles" : "Available for projects & roles"}
             </span>

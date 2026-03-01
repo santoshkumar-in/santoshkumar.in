@@ -77,10 +77,12 @@ export function TopNav({ version, setVersion, C }: TopNavProps) {
 }
 
 interface MobileTabBarProps {
+  version: PortfolioVersion;
   C: ColorScheme;
+  setVersion: (v: PortfolioVersion) => void;
 }
 
-export function MobileTabBar({ C }: MobileTabBarProps) {
+export function MobileTabBar({ version, setVersion, C }: MobileTabBarProps) {
   const pathname = usePathname();
   
   const tabs = [
@@ -95,6 +97,19 @@ export function MobileTabBar({ C }: MobileTabBarProps) {
     return pathname?.startsWith(href);
   };
 
+  const versionChange = () => {
+    const newVersion = version === "genai" ? "fullstack" : "genai";
+    // Track version switch
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'version_switch',
+      from_version: version,
+      to_version: newVersion,
+    });
+    
+    setVersion(newVersion);
+  }
+
   return (
     <div style={{ display: "flex", background: C.sidebar, borderTop: `1px solid ${C.border}`, flexShrink: 0 }}>
       {tabs.map(t => {
@@ -107,6 +122,11 @@ export function MobileTabBar({ C }: MobileTabBarProps) {
           </Link>
         );
       })}
+      <button onClick={versionChange} className="thover"
+        style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "3px", padding: "8px 0", background: "transparent", cursor: "pointer", borderTop: "2px solid transparent", borderLeft: "none", transition: "all 0.15s", textDecoration: "none" }}>
+        <IcoSwap size={14} color={C.textMid} />
+        <span style={{ ...mono, fontSize: "9px", color: C.textDim, letterSpacing: "0.04em" }}>{version === "genai" ? "Full-Stack" : "Gen AI"}</span>
+      </button>
     </div>
   );
 }
@@ -134,6 +154,39 @@ export function BottomBar({ version, C }: BottomBarProps) {
       <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
         <span style={{ ...mono, fontSize: "11px", color: C.bg, fontWeight: 600, letterSpacing: "0.04em" }}>◆ {version}</span>
         <span style={{ ...mono, fontSize: "10px", color: C.bg + "aa" }}>{config.bottomBar}</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        {SOCIALS.map(s => {
+          const Icon = iconMap[s.key as keyof typeof iconMap];
+          return (
+            <a key={s.key} href={s.href} target="_blank" rel="noreferrer" style={{ display: "flex", cursor: "pointer" }}>
+              <Icon size={13} color={C.bg} />
+            </a>
+          );
+        })}
+        <span style={{ ...mono, fontSize: "10px", color: C.bg + "99" }}>{time}</span>
+      </div>
+    </div>
+  );
+}
+
+export function MobileBottomBar({ version, C }: BottomBarProps) {
+  const [time, setTime] = React.useState("");
+  const config = VERSION_CONFIG[version];
+
+  React.useEffect(() => {
+    function tick() { setTime(new Date().toLocaleTimeString("en-GB", { hour12: false })); }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const iconMap = { github: IcoGithub, linkedin: IcoLinkedIn, upwork: IcoUpwork };
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "24px", minHeight: "24px", padding: "0 14px", background: C.accent, flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        <span style={{ ...mono, fontSize: "11px", color: C.bg, fontWeight: 600, letterSpacing: "0.04em" }}>◆ {version}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         {SOCIALS.map(s => {

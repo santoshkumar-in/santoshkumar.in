@@ -3,7 +3,7 @@ import React from "react";
 import { VersionProvider, useVersion } from "@/lib/VersionContext";
 import { getColors, GLOBAL_STYLES, VERSION_CONFIG } from "@/lib/config";
 import { useWidth } from "@/lib/hooks";
-import { TopNav, MobileTabBar, BottomBar } from "@/components/Navigation";
+import { TopNav, MobileTabBar, BottomBar, MobileBottomBar } from "@/components/Navigation";
 import { CookieConsent } from '@/components/CookieConsent'
 import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
 
@@ -21,8 +21,9 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
         <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
           {children}
         </div>
-        {isMobile && <MobileTabBar C={C} />}
-        <BottomBar version={version} C={C} />
+        {isMobile && <MobileTabBar version={version} setVersion={setVersion} C={C} />}
+        {!isMobile && <BottomBar version={version} C={C} />}
+        {isMobile && <MobileBottomBar version={version} C={C} />}
       </div>
     </>
   );
