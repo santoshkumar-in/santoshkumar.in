@@ -46,6 +46,15 @@ export function ContactPage({ version, C }: ContactPageProps) {
     } else if (window.grecaptcha) {
       setRecaptchaLoaded(true);
     }
+
+    // Cleanup on unmount — fires when user leaves /contact
+    return () => {
+      const script = document.getElementById("recaptcha-script");
+      if (script) script.remove();
+      const badge = document.querySelector(".grecaptcha-badge");
+      if (badge) badge.parentElement?.remove();
+      delete (window as any).grecaptcha;
+    };
   }, []);
 
   const valid = {
