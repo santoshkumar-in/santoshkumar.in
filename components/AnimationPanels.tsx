@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
-import { ColorScheme } from "../types";
-import { mono, sans } from "../lib/config";
+import { ColorScheme } from "@/types";
+import { mono, sans } from "@/lib/config";
 import { Dot } from "./Icons";
 
 interface AINetworkPanelProps {

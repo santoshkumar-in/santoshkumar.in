@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from 'react'
-import { HelloPage } from "../components/HelloPage";
-import { useVersion } from "../lib/VersionContext";
-import { getColors, VERSION_CONFIG } from "../lib/config";
 import { useRouter } from "next/navigation";
-import { generateFaviconHref } from "../components/BrandLogo";
+import { HelloPage } from "@/components/HelloPage";
+import { useVersion } from "@/lib/VersionContext";
+import { getColors, VERSION_CONFIG } from "@/lib/config";
+import { generateFaviconHref } from "@/components/BrandLogo";
 
 export default function Home() {
   const { version } = useVersion();

@@ -1,7 +1,7 @@
 import React from "react";
-import { PortfolioVersion, ColorScheme } from "../types";
-import { mono, sans } from "../lib/config";
-import { useWidth } from "../lib/hooks";
+import { PortfolioVersion, ColorScheme } from "@/types";
+import { mono, sans } from "@/lib/config";
+import { useWidth } from "@/lib/hooks";
 import { IcoFile, IcoClose } from "./Icons";
 
 interface ProjectsPageProps {

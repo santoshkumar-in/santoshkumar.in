@@ -1,6 +1,6 @@
 'use client'
-import { PortfolioVersion } from "../types";
-import { VERSION_CONFIG } from "../lib/config";
+import { PortfolioVersion } from "@/types";
+import { VERSION_CONFIG } from "@/lib/config";
 
 interface BrandLogoProps {
   size?: number;

@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { VersionProvider, useVersion } from "../lib/VersionContext";
-import { getColors, GLOBAL_STYLES, VERSION_CONFIG } from "../lib/config";
-import { useWidth } from "../lib/hooks";
-import { TopNav, MobileTabBar, BottomBar } from "../components/Navigation";
-import { CookieConsent } from '../components/CookieConsent'
-import { GoogleTagManager, GoogleTagManagerNoScript } from "../components/GoogleTagManager";
+import { VersionProvider, useVersion } from "@/lib/VersionContext";
+import { getColors, GLOBAL_STYLES, VERSION_CONFIG } from "@/lib/config";
+import { useWidth } from "@/lib/hooks";
+import { TopNav, MobileTabBar, BottomBar } from "@/components/Navigation";
+import { CookieConsent } from '@/components/CookieConsent'
+import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { version, setVersion } = useVersion();

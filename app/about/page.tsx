@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from 'react'
-import { AboutPage } from "../../components/AboutPage";
-import { useVersion } from "../../lib/VersionContext";
-import { getColors, VERSION_CONFIG } from "../../lib/config";
-import { generateFaviconHref } from "../../components/BrandLogo";
+import { AboutPage } from "@/components/AboutPage";
+import { useVersion } from "@/lib/VersionContext";
+import { getColors, VERSION_CONFIG } from "@/lib/config";
+import { generateFaviconHref } from "@/components/BrandLogo";
 
 export default function About() {
   const { version } = useVersion();

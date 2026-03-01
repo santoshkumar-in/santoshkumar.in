@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { VERSION_CONFIG } from "../lib/config";
-
 
 interface CookieConsentProps {
     accent: string;

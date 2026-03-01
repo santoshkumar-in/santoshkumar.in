@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { PortfolioVersion, ColorScheme } from "../types";
-import { mono, sans } from "../lib/config";
-import { useWidth } from "../lib/hooks";
-import { validateContactForm, ValidationError } from "../lib/validation";
+import { PortfolioVersion, ColorScheme } from "@/types";
+import { mono, sans } from "@/lib/config";
+import { useWidth } from "@/lib/hooks";
+import { validateContactForm, ValidationError } from "@/lib/validation";
 import { IcoMail, IcoBrain, Dot, IcoGithub, IcoLinkedIn, IcoUpwork } from "./Icons";
 
 interface ContactPageProps {

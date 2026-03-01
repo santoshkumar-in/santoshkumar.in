@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import { PortfolioVersion, ColorScheme } from "../types";
-import { mono, sans, VERSION_CONFIG } from "../lib/config";
-import { useWidth } from "../lib/hooks";
+import { PortfolioVersion, ColorScheme } from "@/types";
+import { mono, sans, VERSION_CONFIG } from "@/lib/config";
+import { useWidth } from "@/lib/hooks";
 import { Dot, IcoBrain, IcoMail, IcoGithub, IcoLinkedIn, IcoUpwork } from "./Icons";
 import { AINetworkPanel, TerminalPanel } from "./AnimationPanels";
 

@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from 'react'
-import { ContactPage } from "../../components/ContactPage";
-import { useVersion } from "../../lib/VersionContext";
-import { getColors, VERSION_CONFIG } from "../../lib/config";
-import { generateFaviconHref } from "../../components/BrandLogo";
+import { ContactPage } from "@/components/ContactPage";
+import { useVersion } from "@/lib/VersionContext";
+import { getColors, VERSION_CONFIG } from "@/lib/config";
+import { generateFaviconHref } from "@/components/BrandLogo";
 
 export default function Contact() {
   const { version } = useVersion();

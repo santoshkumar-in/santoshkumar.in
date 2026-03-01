@@ -2,8 +2,8 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PortfolioVersion, ColorScheme } from "../types";
-import { VERSION_CONFIG, SOCIALS, mono } from "../lib/config";
+import { PortfolioVersion, ColorScheme } from "@/types";
+import { VERSION_CONFIG, SOCIALS, mono } from "@/lib/config";
 import { BrandLogo } from "./BrandLogo";
 import { IcoFile, IcoMail, IcoSwap, IcoHome, IcoUser, IcoBriefcase, IcoGithub, IcoLinkedIn, IcoUpwork } from "./Icons";
 

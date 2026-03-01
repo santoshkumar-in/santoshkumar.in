@@ -1,9 +1,9 @@
 "use client";
 import { useEffect } from 'react'
-import { ProjectsPage } from "../../components/ProjectsPage";
-import { useVersion } from "../../lib/VersionContext";
-import { getColors, VERSION_CONFIG } from "../../lib/config";
-import { generateFaviconHref } from "../../components/BrandLogo";
+import { ProjectsPage } from "@/components/ProjectsPage";
+import { useVersion } from "@/lib/VersionContext";
+import { getColors, VERSION_CONFIG } from "@/lib/config";
+import { generateFaviconHref } from "@/components/BrandLogo";
 
 export default function Projects() {
   const { version } = useVersion();
