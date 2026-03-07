@@ -5,8 +5,7 @@ import { getColors, GLOBAL_STYLES, VERSION_CONFIG } from "@/lib/config";
 import { useWidth } from "@/lib/hooks";
 import { TopNav, MobileTabBar, BottomBar, MobileBottomBar } from "@/components/Navigation";
 import { CookieConsent } from '@/components/CookieConsent'
-import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
-import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { GoogleTagManager, GoogleTagManagerNoScript, GoogleAnalytics } from "@/components/GoogleTracking";
 import { getPersonJsonLd } from "@/lib/metadata";
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -43,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <GoogleAnalytics measurementId={gtmId} />
+        <GoogleAnalytics gtmId={gtmId} />
         <link rel="icon" type="image/svg+xml" />
         <title>Santosh Kumar - Portfolio</title>
         <meta name="description" content="Gen AI Engineer & Full-Stack Developer" />

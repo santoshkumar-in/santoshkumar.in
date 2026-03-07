@@ -1,11 +1,11 @@
 "use client";
 import Script from "next/script";
 
-interface GoogleTagManagerProps {
+interface GoogleProps {
   gtmId: string;
 }
 
-export function GoogleTagManager({ gtmId }: GoogleTagManagerProps) {
+export function GoogleTagManager({ gtmId }: GoogleProps) {
   if (!gtmId) {
     console.warn("GTM ID not provided");
     return null;
@@ -31,7 +31,7 @@ export function GoogleTagManager({ gtmId }: GoogleTagManagerProps) {
   );
 }
 
-export function GoogleTagManagerNoScript({ gtmId }: GoogleTagManagerProps) {
+export function GoogleTagManagerNoScript({ gtmId }: GoogleProps) {
   if (!gtmId) return null;
 
   return (
@@ -43,5 +43,39 @@ export function GoogleTagManagerNoScript({ gtmId }: GoogleTagManagerProps) {
         style={{ display: "none", visibility: "hidden" }}
       />
     </noscript>
+  );
+}
+
+
+export function GoogleAnalytics({ gtmId }: GoogleProps) {
+  if (!gtmId) {
+    console.warn("GA4 Measurement ID not provided");
+    return null;
+  }
+
+  return (
+    <>
+      {/* Load the gtag.js library */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtmId}`}
+        strategy="afterInteractive"
+      />
+
+      {/* Initialise GA4 */}
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${gtmId}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
+    </>
   );
 }
