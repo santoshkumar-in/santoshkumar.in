@@ -16,7 +16,7 @@ interface TopNavProps {
 export function TopNav({ version, setVersion, C }: TopNavProps) {
   const pathname = usePathname();
   const config = VERSION_CONFIG[version];
-  
+
   const tabs = [
     { href: "/", label: "hello.tsx" },
     { href: "/about", label: "about.tsx" },
@@ -37,18 +37,18 @@ export function TopNav({ version, setVersion, C }: TopNavProps) {
       from_version: version,
       to_version: newVersion,
     });
-    
+
     setVersion(newVersion);
   }
 
   return (
     <nav style={{ display: "flex", alignItems: "stretch", height: "46px", minHeight: "46px", background: C.sidebar, borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
-      <div className="cursor" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "0 20px", borderRight: `1px solid ${C.border}`, flexShrink: 0 }}>
+      <Link  href="/" className="cursor" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "0 20px", borderRight: `1px solid ${C.border}`, flexShrink: 0 }}>
         <BrandLogo size={26} version={version} />
         <span style={{ ...mono, fontSize: "13px", color: C.textBright, letterSpacing: "0.02em" }}>
           santosh<span style={{ color: C.accent }}>.</span>kumar
         </span>
-      </div>
+       </Link>
       <div style={{ display: "flex", flex: 1, overflowX: "auto" }}>
         {tabs.map(t => {
           const on = isActive(t.href);
@@ -84,7 +84,7 @@ interface MobileTabBarProps {
 
 export function MobileTabBar({ version, setVersion, C }: MobileTabBarProps) {
   const pathname = usePathname();
-  
+
   const tabs = [
     { href: "/", label: "Home", Icon: IcoHome },
     { href: "/about", label: "About", Icon: IcoUser },
@@ -106,7 +106,7 @@ export function MobileTabBar({ version, setVersion, C }: MobileTabBarProps) {
       from_version: version,
       to_version: newVersion,
     });
-    
+
     setVersion(newVersion);
   }
 

@@ -149,7 +149,7 @@ export function AboutPage({ version, C }: AboutPageProps) {
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ fontSize: "12px" }}>{version === "genai" ? "⚡" : "📊"}</span>
             <span style={{ ...mono, fontSize: "11px", color: C.textMid }}>
-              {version === "genai" ? "15+ AI projects shipped" : "50+ projects shipped"}
+              {version === "genai" ? "0 AI projects shipped" : "25+ projects shipped"}
             </span>
           </div>
         </div>

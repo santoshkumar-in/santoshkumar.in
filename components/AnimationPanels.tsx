@@ -143,30 +143,77 @@ export function AINetworkPanel({ C }: AINetworkPanelProps) {
   );
 }
 
+
 interface TerminalPanelProps {
   C: ColorScheme;
 }
 
 export function TerminalPanel({ C }: TerminalPanelProps) {
   const [visibleLines, setVisibleLines] = useState<number[]>([]);
+  const [activeTab, setActiveTab] = useState<"terminal" | "metrics" | "git">("terminal");
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const TERMINAL_LINES = [
-    { delay: 0, text: "$ node --version", color: C.textMid },
-    { delay: 400, text: "v20.11.0", color: C.green },
-    { delay: 900, text: "$ aws ecs list-services --cluster prod", color: C.textMid },
-    { delay: 1400, text: "✔  api-gateway        RUNNING  (3/3 tasks)", color: C.green },
-    { delay: 1600, text: "✔  worker-queue       RUNNING  (2/2 tasks)", color: C.green },
-    { delay: 1800, text: "✔  websocket-hub      RUNNING  (4/4 tasks)", color: C.green },
-    { delay: 2400, text: "$ git log --oneline -3", color: C.textMid },
-    { delay: 2900, text: "a3f92c1 feat: WebSocket clustering", color: C.synStr },
-    { delay: 3100, text: "b7e14d8 perf: MongoDB aggregation 3x", color: C.synStr },
-    { delay: 3300, text: "c9a03f2 chore: Lambda ARM64 migration", color: C.synStr },
-    { delay: 3900, text: "$ whoami", color: C.textMid },
-    { delay: 4300, text: "santosh · full-stack · freelancer · builder", color: C.accent },
+  const dim    = C.textDim;
+  const mid    = C.textMid;
+  const bright = C.textBright;
+
+  // ── Tab: terminal ──────────────────────────────────────────────────────────
+  // Reads like a genuine senior dev session:
+  //   1. Check runtime
+  //   2. Inspect a live prod cluster
+  //   3. Run a quick load test
+  //   4. Peek at recent git work
+  //   5. Cheeky whoami
+  const TERMINAL_LINES: { delay: number; text: string; color: string }[] = [
+    { delay: 0,    text: "$ node --version",                                     color: mid    },
+    { delay: 350,  text: "v20.11.0",                                              color: C.green },
+
+    { delay: 900,  text: "$ aws ecs describe-services --cluster prod-ap-south-1", color: mid    },
+    { delay: 1350, text: "  api-gateway       ACTIVE   desired:3  running:3",     color: C.green },
+    { delay: 1500, text: "  websocket-hub     ACTIVE   desired:4  running:4",     color: C.green },
+    { delay: 1650, text: "  worker-queue      ACTIVE   desired:2  running:2",     color: C.green },
+    { delay: 1800, text: "  scheduler-lambda  ACTIVE   invocations/min: 240",     color: C.green },
+
+    { delay: 2400, text: "$ autocannon -c 500 -d 10 https://api.prod/health",     color: mid    },
+    { delay: 2850, text: "  500 connections | 10s | pipeline: 1",                 color: dim    },
+    { delay: 3050, text: "  Req/sec avg: 14,823   p99 latency: 38ms",             color: C.accent },
+    { delay: 3200, text: "  Throughput: 47.2 MB/s   0 errors",                    color: C.green },
+
+    { delay: 3800, text: "$ git log --oneline -4",                                color: mid    },
+    { delay: 4200, text: "  e1a03c2  feat: OAuth2 PKCE + refresh token rotation", color: C.synStr },
+    { delay: 4350, text: "  b8f71d9  perf: MongoDB pipeline 3.2x speedup",        color: C.synStr },
+    { delay: 4500, text: "  a4c90e1  fix: race condition in distributed queue",   color: C.synStr },
+    { delay: 4650, text: "  9d3f28b  chore: Lambda ARM64 — 40% cost cut",         color: C.synStr },
+
+    { delay: 5200, text: "$ whoami",                                               color: mid    },
+    { delay: 5600, text: "  santosh · full-stack · freelancer · ships things",    color: C.accent },
+  ];
+
+  // ── Tab: metrics ───────────────────────────────────────────────────────────
+  // Snapshot of real-world project numbers
+  const METRICS = [
+    { label: "Projects shipped",       value: "50+",    color: C.accent  },
+    { label: "Avg API p99 latency",    value: "38 ms",  color: C.green   },
+    { label: "AWS services mastered",  value: "12",     color: C.purple  },
+    { label: "Uptime SLA (prod)",      value: "99.97%", color: C.green   },
+    { label: "Concurrent WS clients",  value: "10 000", color: C.accent  },
+    { label: "Lambda cost reduction",  value: "-40%",   color: C.green   },
+    { label: "DB query optimisation",  value: "3.2×",   color: C.orange  },
+    { label: "Freelance clients",      value: "20+",    color: C.accent  },
+  ];
+
+  // ── Tab: git ───────────────────────────────────────────────────────────────
+  const COMMITS = [
+    { hash: "e1a03c2", branch: "feat/auth",  msg: "OAuth2 PKCE flow with refresh token rotation",        time: "2h ago",  color: C.accent  },
+    { hash: "b8f71d9", branch: "main",       msg: "MongoDB aggregation pipeline — 3.2× speedup",         time: "1d ago",  color: C.green   },
+    { hash: "a4c90e1", branch: "main",       msg: "Fix race condition in distributed queue handler",      time: "2d ago",  color: C.orange  },
+    { hash: "9d3f28b", branch: "infra/aws",  msg: "Migrate Lambda to ARM64 — 40% cost reduction",        time: "4d ago",  color: C.purple  },
+    { hash: "7c2b18f", branch: "main",       msg: "WebSocket hub: scale to 10k concurrent connections",  time: "6d ago",  color: C.accent  },
+    { hash: "5a9e04d", branch: "feat/cache", msg: "Redis layer cuts DB read load by 70%",                time: "1w ago",  color: C.green   },
   ];
 
   useEffect(() => {
+    if (activeTab !== "terminal") return;
     setVisibleLines([]);
     const timers = TERMINAL_LINES.map((line, i) =>
       setTimeout(() => {
@@ -175,33 +222,134 @@ export function TerminalPanel({ C }: TerminalPanelProps) {
       }, line.delay)
     );
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [activeTab]);
+
+  const mono = { fontFamily: "'IBM Plex Mono', monospace" };
+  const sans = { fontFamily: "'IBM Plex Sans', sans-serif" };
+
+  const tabs = [
+    { id: "terminal", label: "terminal" },
+    { id: "metrics",  label: "metrics"  },
+    { id: "git",      label: "git log"  },
+  ] as const;
 
   return (
-    <div className="fade-r" style={{ width: "100%", height: "100%", maxHeight: "600px", display: "flex", flexDirection: "column", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "10px", overflow: "hidden" }}>
+    <div
+      className="fade-r"
+      style={{
+        width: "100%", height: "100%", maxHeight: "600px",
+        display: "flex", flexDirection: "column",
+        background: C.surface, border: `1px solid ${C.border}`,
+        borderRadius: "10px", overflow: "hidden",
+        boxShadow: `0 24px 64px rgba(0,0,0,0.4), 0 0 80px ${C.accent}08`,
+      }}
+    >
+      {/* Window chrome */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", background: C.elevated, borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
+        {/* Traffic lights */}
         <div style={{ display: "flex", gap: "7px" }}>
           {[C.red, C.orange, C.green].map((color, i) => (
             <span key={i} style={{ width: "11px", height: "11px", borderRadius: "50%", background: color, display: "block" }} />
           ))}
         </div>
-        <div style={{ ...mono, fontSize: "10px", color: C.textDim }}>terminal</div>
+
+        {/* Tabs */}
+        <div style={{ display: "flex", gap: "2px" }}>
+          {tabs.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setActiveTab(t.id)}
+              style={{
+                ...mono, fontSize: "10px", padding: "3px 10px", borderRadius: "4px",
+                cursor: "pointer", border: "none", transition: "all 0.12s",
+                color:      activeTab === t.id ? C.textBright : dim,
+                background: activeTab === t.id ? C.border      : "transparent",
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Status */}
         <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-          <Dot color={C.green} />
-          <span style={{ ...mono, fontSize: "10px", color: C.textDim }}>online</span>
+          <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: C.green, boxShadow: `0 0 5px ${C.green}80`, flexShrink: 0 }} />
+          <span style={{ ...mono, fontSize: "10px", color: dim }}>online</span>
         </div>
       </div>
-      <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "14px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-          {TERMINAL_LINES.map((line, i) =>
-            visibleLines.includes(i) ? (
-              <div key={i} style={{ ...mono, fontSize: "11.5px", color: line.color, lineHeight: "1.8", animation: "fadeIn 0.3s ease both" }}>
-                {line.text}
+
+      {/* ── Terminal tab ────────────────────────────────────────────────────── */}
+      {activeTab === "terminal" && (
+        <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "14px 16px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
+            {TERMINAL_LINES.map((line, i) =>
+              visibleLines.includes(i) ? (
+                <div
+                  key={i}
+                  style={{ ...mono, fontSize: "11.5px", color: line.color, lineHeight: "1.85", animation: "fadeIn 0.25s ease both" }}
+                >
+                  {line.text}
+                </div>
+              ) : null
+            )}
+            {/* blinking cursor */}
+            {visibleLines.length < TERMINAL_LINES.length && (
+              <span style={{ ...mono, fontSize: "11.5px", color: mid }}>
+                {"$ "}<span className="cursor" style={{ color: C.accent }}>▋</span>
+              </span>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ── Metrics tab ─────────────────────────────────────────────────────── */}
+      {activeTab === "metrics" && (
+        <div style={{ flex: 1, overflowY: "auto", padding: "16px" }}>
+          <p style={{ ...mono, fontSize: "10px", color: dim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+            prod snapshot · live numbers
+          </p>
+          {METRICS.map((m, i) => (
+            <div
+              key={m.label}
+              style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: `1px solid ${C.border}`, animation: `fadeIn 0.3s ease ${i * 0.05}s both` }}
+            >
+              <span style={{ ...sans, fontSize: "12px", color: mid, fontWeight: 300 }}>{m.label}</span>
+              <span style={{ ...mono, fontSize: "13px", color: m.color, fontWeight: 500 }}>{m.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* ── Git log tab ─────────────────────────────────────────────────────── */}
+      {activeTab === "git" && (
+        <div style={{ flex: 1, overflowY: "auto", padding: "16px" }}>
+          <p style={{ ...mono, fontSize: "10px", color: dim, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "12px" }}>
+            recent commits · main
+          </p>
+          {COMMITS.map((c, i) => (
+            <div
+              key={c.hash}
+              style={{ display: "flex", gap: "10px", padding: "9px 0", borderBottom: i < COMMITS.length - 1 ? `1px solid ${C.border}` : "none", animation: `fadeIn 0.3s ease ${i * 0.07}s both` }}
+            >
+              {/* Graph line */}
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "3px", paddingTop: "3px" }}>
+                <span style={{ width: "10px", height: "10px", borderRadius: "50%", border: `2px solid ${c.color}`, background: C.surface, flexShrink: 0, display: "block" }} />
+                {i < COMMITS.length - 1 && <div style={{ width: "1px", flex: 1, background: C.border, minHeight: "14px" }} />}
               </div>
-            ) : null
-          )}
+
+              {/* Content */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "3px", flexWrap: "wrap" }}>
+                  <span style={{ ...mono, fontSize: "10px", color: c.color, background: c.color + "15", padding: "1px 6px", borderRadius: "3px" }}>{c.hash}</span>
+                  <span style={{ ...mono, fontSize: "9px",  color: dim, background: C.elevated, padding: "1px 5px", borderRadius: "3px" }}>{c.branch}</span>
+                  <span style={{ ...mono, fontSize: "9px",  color: dim, marginLeft: "auto" }}>{c.time}</span>
+                </div>
+                <p style={{ ...sans, fontSize: "11.5px", color: C.text, lineHeight: "1.5", fontWeight: 300, margin: 0 }}>{c.msg}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -14,59 +14,65 @@ export function ProjectsPage({ version, C }: ProjectsPageProps) {
   const isMobile = w < 768;
 
   const projectsData = version === "genai" ? [
+    // {
+    //   id: "ai-chatbot",
+    //   num: "01",
+    //   name: "AI Chatbot System",
+    //   tag: "Claude API",
+    //   url: '#',
+    //   desc: "Production-ready AI assistant using Claude API with streaming responses, context management, and conversation memory.",
+    //   stack: ["Claude API", "Anthropic SDK", "TypeScript", "Streaming"],
+    //   color: C.accent,
+    // },
+    // {
+    //   id: "rag-system",
+    //   num: "02",
+    //   url: '#',
+    //   name: "RAG Pipeline",
+    //   tag: "Vector DB",
+    //   desc: "Document Q&A system with RAG architecture. Vector embeddings, semantic search, and intelligent retrieval using Pinecone.",
+    //   stack: ["LangChain", "Pinecone", "Python", "RAG"],
+    //   color: C.purple,
+    // },
+    // {
+    //   id: "ai-automation",
+    //   num: "03",
+    //   url: '#',
+    //   name: "Workflow Agent",
+    //   tag: "Agentic AI",
+    //   desc: "Intelligent workflow automation using LLM agents with tool calling, multi-step reasoning, and task orchestration.",
+    //   stack: ["Claude", "Function Calling", "Node.js", "Agents"],
+    //   color: C.green,
+    // },
+  ] : [
     {
-      id: "ai-chatbot",
+      id: "git-shrink",
       num: "01",
-      name: "AI Chatbot System",
-      tag: "Claude API",
-      desc: "Production-ready AI assistant using Claude API with streaming responses, context management, and conversation memory.",
-      stack: ["Claude API", "Anthropic SDK", "TypeScript", "Streaming"],
+      name: "git-shrink",
+      tag: "Node.js · CLI",
+      desc: "Semantic git history compressor. Scores every pair of commits across message similarity, file proximity, and directory overlap — then suggests squash groups you can approve, edit, or skip before writing a ready-to-apply rebase script.",
+      stack: ["Node.js", "simple-git", "Commander", "Jest"],
+      url: "https://github.com/santoshkumar-in/git-shrink",
       color: C.accent,
     },
     {
-      id: "rag-system",
+      id: "schema-drift",
       num: "02",
-      name: "RAG Pipeline",
-      tag: "Vector DB",
-      desc: "Document Q&A system with RAG architecture. Vector embeddings, semantic search, and intelligent retrieval using Pinecone.",
-      stack: ["LangChain", "Pinecone", "Python", "RAG"],
-      color: C.purple,
-    },
-    {
-      id: "ai-automation",
-      num: "03",
-      name: "Workflow Agent",
-      tag: "Agentic AI",
-      desc: "Intelligent workflow automation using LLM agents with tool calling, multi-step reasoning, and task orchestration.",
-      stack: ["Claude", "Function Calling", "Node.js", "Agents"],
-      color: C.green,
-    },
-  ] : [
-    {
-      id: "justeat",
-      num: "01",
-      name: "JustEat Clone",
-      tag: "Team Project",
-      desc: "Replicated JustEat's home and restaurant listing pages as a team. Practiced Git workflow, agile sprints, and responsive CSS architecture.",
-      stack: ["HTML", "CSS", "GitHub", "Agile"],
+      name: "schema-drift",
+      tag: "Node.js · CLI",
+      desc: "Detects breaking schema changes between API versions. Diffs OpenAPI specs across fields, types, and required constraints — flags regressions before they reach production.",
+      stack: ["Node.js", "Commander", "js-yaml", "Jest"],
+      url: "https://github.com/santoshkumar-in/schema-drift",
       color: C.orange,
     },
     {
-      id: "rtfkt",
-      num: "02",
-      name: "RTFKT Clone",
-      tag: "Team Lead",
-      desc: "Led a team cloning the RTFKT Forging Event page. Managed task allocation in Jira, conducted code reviews, and delivered the SCSS/JS animation layer.",
-      stack: ["HTML", "SCSS", "JavaScript", "Jira"],
-      color: C.purple,
-    },
-    {
-      id: "alphaspy",
+      id: "reqflow",
       num: "03",
-      name: "Alpha-Spy Bot",
-      tag: "Node.js",
-      desc: "Production Discord bot mirroring messages between servers in real-time. Used by the NFT community. MongoDB-backed with Axios integrations.",
-      stack: ["Node.js", "Discord.js", "MongoDB", "Axios"],
+      name: "reqflow",
+      tag: "Node.js · CLI",
+      desc: "Zero-instrumentation HTTP request tracer. Sits between your services as a transparent proxy, injects W3C trace headers, and stitches spans into a waterfall timeline — without touching your application code.",
+      stack: ["Node.js", "http-proxy", "Commander", "Jest"],
+      url: "https://github.com/santoshkumar-in/reqflow",
       color: C.green,
     },
   ];
@@ -98,6 +104,7 @@ export function ProjectsPage({ version, C }: ProjectsPageProps) {
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: "14px" }}>
           {projectsData.map(proj => (
             <div key={proj.id} className="chover" style={{ display: "flex", flexDirection: "column", background: C.surface, border: `1px solid ${C.border}`, borderLeft: `3px solid ${proj.color}`, borderRadius: "8px", overflow: "hidden", transition: "all 0.18s" }}>
+             <a target="_blank" href={proj.url || '#'}>
               <div style={{ padding: "16px" }}>
                 <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "8px" }}>
                   <div>
@@ -110,6 +117,8 @@ export function ProjectsPage({ version, C }: ProjectsPageProps) {
                   {proj.stack.map(s => <Chip key={s} label={s} color={proj.color} />)}
                 </div>
               </div>
+             </a>
+              
             </div>
           ))}
         </div>

@@ -38,16 +38,16 @@ export function HelloPage({ onContactClick, version, C }: HelloPageProps) {
 
   const stats = version === "genai"
     ? [
-        { label: "AI Projects", value: "15+" },
-        { label: "LLM APIs Used", value: "5+" },
-        { label: "Vector DBs", value: "3+" },
-        { label: "RAG Systems", value: "8+" },
+        { label: "AI Projects", value: "0" },
+        { label: "LLM APIs Used", value: "0" },
+        { label: "Vector DBs", value: "0" },
+        { label: "RAG Systems", value: "0" },
       ]
     : [
-        { label: "Projects Shipped", value: "50+" },
-        { label: "AWS Services Used", value: "12+" },
-        { label: "Tech in Stack", value: "30+" },
-        { label: "Freelance Clients", value: "20+" },
+        { label: "Projects Shipped", value: "25+" },
+        { label: "AWS Services Used", value: "10+" },
+        { label: "Tech in Stack", value: "20+" },
+        { label: "Freelance Clients", value: "10+" },
       ];
 
   return (
