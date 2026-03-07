@@ -6,6 +6,7 @@ import { useWidth } from "@/lib/hooks";
 import { TopNav, MobileTabBar, BottomBar, MobileBottomBar } from "@/components/Navigation";
 import { CookieConsent } from '@/components/CookieConsent'
 import { GoogleTagManager, GoogleTagManagerNoScript } from "@/components/GoogleTagManager";
+import { rootMetadata, getPersonJsonLd } from "@/lib/metadata";
 
 function LayoutContent({ children }: { children: React.ReactNode }) {
   const { version, setVersion } = useVersion();
@@ -37,12 +38,15 @@ function CookieConsentContent() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "";
+  const jsonLd = getPersonJsonLd();
   return (
     <html lang="en">
       <head>
         <link rel="icon" type="image/svg+xml" />
-        <title>Santosh Kumar - Portfolio</title>
-        <meta name="description" content="Gen AI Engineer & Full-Stack Developer" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <GoogleTagManagerNoScript gtmId={gtmId} />

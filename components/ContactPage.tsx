@@ -13,7 +13,7 @@ interface ContactPageProps {
 const SOCIALS = [
   { key: "github", label: "santoshkumar-in", href: "https://github.com/santoshkumar-in", Icon: IcoGithub },
   { key: "linkedin", label: "santoshkumar-in", href: "https://www.linkedin.com/in/santoshkumar-in/", Icon: IcoLinkedIn },
-  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/santoshkumar", Icon: IcoUpwork },
+  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/~012dfc919f360b2068", Icon: IcoUpwork },
 ];
 
 export function ContactPage({ version, C }: ContactPageProps) {

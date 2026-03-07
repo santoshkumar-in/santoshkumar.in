@@ -58,7 +58,7 @@ export const getColors = (version: string): ColorScheme => ({
 export const SOCIALS = [
   { key: "github", label: "santoshkumar-in", href: "https://github.com/santoshkumar-in", shortLabel: "GitHub" },
   { key: "linkedin", label: "santoshkumar-in", href: "https://www.linkedin.com/in/santoshkumar-in/", shortLabel: "LinkedIn" },
-  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/santoshkumar", shortLabel: "Upwork" },
+  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/~012dfc919f360b2068", shortLabel: "Upwork" },
 ];
 
 export const GLOBAL_STYLES = `

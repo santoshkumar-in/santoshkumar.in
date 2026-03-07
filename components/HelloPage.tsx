@@ -14,7 +14,7 @@ interface HelloPageProps {
 const SOCIALS = [
   { key: "github", label: "santoshkumar-in", href: "https://github.com/santoshkumar-in", Icon: IcoGithub, shortLabel: "GitHub" },
   { key: "linkedin", label: "santoshkumar-in", href: "https://www.linkedin.com/in/santoshkumar-in/", Icon: IcoLinkedIn, shortLabel: "LinkedIn" },
-  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/santoshkumar", Icon: IcoUpwork, shortLabel: "Upwork" },
+  { key: "upwork", label: "santoshkumar", href: "https://www.upwork.com/freelancers/~012dfc919f360b2068", Icon: IcoUpwork, shortLabel: "Upwork" },
 ];
 
 export function HelloPage({ onContactClick, version, C }: HelloPageProps) {
