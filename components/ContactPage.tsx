@@ -142,6 +142,8 @@ export function ContactPage({ version, C }: ContactPageProps) {
         setStatus("idle");
       }, 5000);
     } catch (error: any) {
+      //Track event      
+      trackEvent("contact_form_error",  {version, error });
       console.error("Contact form error:", error);
       setErrorMessage(error.message || "An error occurred. Please try again.");
       setStatus("error");
