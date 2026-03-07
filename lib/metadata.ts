@@ -77,7 +77,7 @@ const MERGED_KEYWORDS = [
 
 // ─── OG image — use a single image that works for both versions ───────────────
 // Design tip: dark card with "Full-Stack · Gen AI" subtitle covers both.
-const OG_IMAGE = `${BASE_URL}/santosh-kumar.PNG`;
+const OG_IMAGE = `${BASE_URL}/santosh-kumar.webp`;
 
 // ─── Root / shared metadata ───────────────────────────────────────────────────
 // Used by app/layout.tsx — applies to every route unless overridden.
@@ -170,8 +170,8 @@ export const versionMetadata = {
       "Generative AI Engineer with hands-on experience in Claude API, OpenAI GPT-4, RAG systems, " +
       "LangChain, and agentic workflows. Full-stack foundation in Node.js and AWS. " +
       "Pursuing Gen AI certification. Open to AI engineering roles and LLM product teams.",
-    alternates: { canonical: `${BASE_URL}/ai` },
-    openGraph:  { url: `${BASE_URL}/ai` },
+    alternates: { canonical: `${BASE_URL}` },
+    openGraph:  { url: `${BASE_URL}` },
   } satisfies Partial<Metadata>,
 
 };
